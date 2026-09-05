@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated corpus / intermediate training data
+data/train_raw.jsonl
+data/valid_raw.jsonl
+data/dedup.sqlite3
+data/bin/
+data/stage_c/
+data/stage_c_v2/
+data/stage_d/
+data/stage_d_v2/*.npy
+data/stage_e/*.npy
+
+# Intermediate checkpoints
+checkpoints/phase*.pt
+checkpoints/stage*.pt
+checkpoints/*latest*.pt
+checkpoints/tinychat_f427_conversational_fp32.pt
+checkpoints/tinychat_f427_final_behavior_fp32.pt
+checkpoints/tinychat_f427_final_fp32.pt
+checkpoints/tinychat_f427_fp32_final.pt
+
+# Temporary archives/builds
+*.zip
+*.tar.gz
+build/
+dist/
+*.egg-info/

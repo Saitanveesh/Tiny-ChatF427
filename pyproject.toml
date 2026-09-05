@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinychat-f427"
+version = "0.1.0"
+description = "From-scratch 1.206M-parameter Transformer research prototype targeting STM32F427-class constraints"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Saitanveesh"}]
+dependencies = [
+  "torch>=2.0",
+  "numpy>=1.24",
+  "tokenizers>=0.20",
+  "datasets>=3.0",
+  "tqdm>=4.66",
+  "psutil>=5.9",
+]
+
+[tool.setuptools]
+packages = ["tinychat"]
