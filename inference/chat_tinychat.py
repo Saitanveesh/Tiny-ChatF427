@@ -1,0 +1,135 @@
+import re
+import torch
+from tokenizers import Tokenizer
+
+from tinychat.model import TinyChatF427, CONTEXT
+
+
+MODEL_PATH = "checkpoints/tinychat_f427_final_trained_fp32.pt"
+TOKENIZER_PATH = "tokenizer/tokenizer.json"
+
+DEVICE = torch.device("cpu")
+
+torch.set_num_threads(4)
+
+
+tok = Tokenizer.from_file(TOKENIZER_PATH)
+
+BOS = tok.token_to_id("<BOS>")
+EOS = tok.token_to_id("<EOS>")
+USER = tok.token_to_id("<USER>")
+ASSISTANT = tok.token_to_id("<ASSISTANT>")
+EOT = tok.token_to_id("<EOT>")
+
+assert [BOS, EOS, USER, ASSISTANT, EOT] == [0, 1, 2, 3, 4]
+
+
+checkpoint = torch.load(
+    MODEL_PATH,
+    map_location=DEVICE,
+    weights_only=False
+)
+
+model = TinyChatF427().to(DEVICE)
+model.load_state_dict(checkpoint["model_state"])
+model.eval()
+
+
+def arithmetic_answer(text):
+    q = text.lower().strip()
+    q = q.replace("multiplied by", "*")
+    q = q.replace("times", "*")
+    q = q.replace("plus", "+")
+    q = q.replace("minus", "-")
+    q = q.replace("divided by", "/")
+
+    match = re.search(r"(-?\d+)\s*([+\-*/])\s*(-?\d+)", q)
+    if not match:
+        return None
+
+    a = int(match.group(1))
+    op = match.group(2)
+    b = int(match.group(3))
+
+    if op == "+":
+        result = a + b
+    elif op == "-":
+        result = a - b
+    elif op == "*":
+        result = a * b
+    else:
+        if b == 0:
+            return "Division by zero is undefined."
+        result = a // b if a % b == 0 else a / b
+
+    return f"{a} {op} {b} = {result}."
+
+
+def limit_sentences(text, maximum=2):
+    text = text.strip()
+    if not text:
+        return text
+    parts = re.split(r"(?<=[.!?])\s+", text)
+    return " ".join(parts[:maximum]).strip()
+
+
+@torch.no_grad()
+def generate(question):
+    q_ids = tok.encode(question, add_special_tokens=False).ids
+    ids = [BOS, USER] + q_ids + [EOT, ASSISTANT]
+    generated = []
+
+    for _ in range(48):
+        x = torch.tensor(
+            [ids[-CONTEXT:]],
+            dtype=torch.long,
+            device=DEVICE
+        )
+        logits = model(x)
+        next_id = int(torch.argmax(logits[0, -1]).item())
+
+        if next_id in (EOT, EOS, BOS, USER, ASSISTANT):
+            break
+
+        ids.append(next_id)
+        generated.append(next_id)
+
+    result = tok.decode(generated, skip_special_tokens=True).strip()
+    return limit_sentences(result, maximum=2)
+
+
+print()
+print("==============================================")
+print(" TinyChat-F427")
+print(" Local 1,206,864-Parameter Transformer")
+print("==============================================")
+print()
+print("Type a question.")
+print("Commands: /quit")
+print()
+
+
+while True:
+    try:
+        question = input("> ").strip()
+    except (KeyboardInterrupt, EOFError):
+        print()
+        break
+
+    if not question:
+        continue
+
+    if question.lower() in ("/quit", "/exit", "quit", "exit"):
+        break
+
+    arithmetic = arithmetic_answer(question)
+    answer = arithmetic if arithmetic is not None else generate(question)
+
+    if not answer:
+        answer = "I don't know enough about that."
+
+    print(answer)
+    print()
+
+
+print("TinyChat stopped.")
