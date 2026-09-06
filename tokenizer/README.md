@@ -9,7 +9,7 @@ TinyChat-F427 uses a tokenizer trained from scratch for this project.
 
 Files:
 
-- `tokenizer.json` — complete Hugging Face Tokenizers serialization
+- `tokenizer.json` — complete frozen Hugging Face Tokenizers serialization
 - `tinychat-vocab.json` — vocabulary
 - `tinychat-merges.txt` — learned BPE merges
 - `tokenizer_manifest.json` — recorded hashes/configuration
@@ -17,3 +17,5 @@ Files:
 Frozen tokenizer SHA-256:
 
 `e0ab232a332b5f1f9b55094e21c97e69350b2f8045e6d49de935a61a2dd52c85`
+
+The training and PC inference scripts use `tokenizer/tokenizer.json` directly.
