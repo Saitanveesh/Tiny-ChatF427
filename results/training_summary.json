@@ -1,0 +1,15 @@
+{
+  "project": "TinyChat-F427",
+  "parameters": 1206864,
+  "training_tokens": 30003200,
+  "tokenizer_sha256": "e0ab232a332b5f1f9b55094e21c97e69350b2f8045e6d49de935a61a2dd52c85",
+  "final_model": "checkpoints/tinychat_f427_fp32_final.pt",
+  "final_model_sha256": "089b72b339c5edc56877214b2a028b97af5e94867c2cb2c5caec608cc31b7a5c",
+  "final_validation_loss": 2.748528172572454,
+  "source_validation_losses": {
+    "wikitext": 3.512967586517334,
+    "oasst1": 2.876224637031555,
+    "dolly": 2.855841875076294,
+    "squad": 2.1610027551651
+  }
+}
