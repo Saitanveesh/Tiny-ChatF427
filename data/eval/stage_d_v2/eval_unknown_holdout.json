@@ -1,0 +1,177 @@
+[
+  {
+    "fact_id": "unknown_holdout_0",
+    "category": "unknown",
+    "question": "What is Veleno100 Mineral?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_1",
+    "category": "unknown",
+    "question": "Please explain Brenan101 Mineral.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_2",
+    "category": "unknown",
+    "question": "What is Talix102 Mineral?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_3",
+    "category": "unknown",
+    "question": "Please explain Xelan103 Particle.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_4",
+    "category": "unknown",
+    "question": "What is Qaror104 Engine?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_5",
+    "category": "unknown",
+    "question": "Please explain Noreno105 Engine.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_6",
+    "category": "unknown",
+    "question": "What is Rivara106 Engine?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_7",
+    "category": "unknown",
+    "question": "Please explain Xelor107 Prism.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_8",
+    "category": "unknown",
+    "question": "What is Xelova108 Protocol?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_9",
+    "category": "unknown",
+    "question": "Please explain Noruli109 Protocol.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_10",
+    "category": "unknown",
+    "question": "What is Qaran110 Prism?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_11",
+    "category": "unknown",
+    "question": "Please explain Brenova111 Theory.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_12",
+    "category": "unknown",
+    "question": "What is Kaleth112 Mineral?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_13",
+    "category": "unknown",
+    "question": "Please explain Brenara113 Prism.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_14",
+    "category": "unknown",
+    "question": "What is Xeluli114 Particle?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_15",
+    "category": "unknown",
+    "question": "Please explain Zorara115 Mineral.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_16",
+    "category": "unknown",
+    "question": "What is Norara116 Protocol?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_17",
+    "category": "unknown",
+    "question": "Please explain Lorova117 Theory.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_18",
+    "category": "unknown",
+    "question": "What is Loror118 Device?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_19",
+    "category": "unknown",
+    "question": "Please explain Loreno119 Device.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_20",
+    "category": "unknown",
+    "question": "What is Mirara120 Process?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_21",
+    "category": "unknown",
+    "question": "Please explain Velix121 Mineral.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_22",
+    "category": "unknown",
+    "question": "What is Xelor122 Mineral?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_23",
+    "category": "unknown",
+    "question": "Please explain Rivor123 Mineral.",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  },
+  {
+    "fact_id": "unknown_holdout_24",
+    "category": "unknown",
+    "question": "What is Zorova124 Mineral?",
+    "answer": "I don't know enough about that.",
+    "test_type": "unseen_unknown_entity"
+  }
+]
