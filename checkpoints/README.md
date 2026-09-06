@@ -1,10 +1,19 @@
 # Checkpoints
 
-Two compact FP32 checkpoints are retained for reproducibility:
+The training archive contains the FP32 checkpoints listed in `checkpoint_manifest.json`.
 
-- `tinychat_f427_baseline_30M.pt` — frozen 30M-token baseline
-- `tinychat_f427_final_trained_fp32.pt` — final Stage-F candidate
+Binary `.pt` files are not committed in this source-only repository snapshot. The final checkpoint is about 4.85 MB, so it can be added directly to GitHub or Git LFS by the repository owner if a ready-to-run clone is desired.
 
-SHA-256 values are listed in the repository README.
+For PC inference, place the final model at:
 
-Intermediate phase/stage checkpoints are intentionally omitted.
+```text
+checkpoints/tinychat_f427_final_trained_fp32.pt
+```
+
+Then run:
+
+```bash
+python inference/chat_tinychat.py
+```
+
+Always verify the SHA-256 value against `checkpoint_manifest.json` before using a copied checkpoint.
