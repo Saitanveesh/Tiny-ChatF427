@@ -1,5 +1,25 @@
-# Recorded results
+# Recorded experiment results
 
-This directory contains the JSON summaries/histories and text logs from the development run. They are kept because the project conclusion depends on both successful and unsuccessful stages.
+This directory contains the logs and machine-readable histories retained from the TinyChat-F427 training run.
 
-The logs should be treated as experimental records, not as proof of final STM32 deployment.
+Key files:
+
+- `logs/full_training.log` — 30M-token baseline training output
+- `training_history.json` — baseline validation history
+- `training_summary.json` — baseline summary
+- `training_qualification.json` — learning-rate qualification results
+- `logs/stage_c_v2_training.log` — Stage-C v2 specialization
+- `logs/stage_d_v2_training.log` and `stage_d_v2_history.json` — Stage-D v2 factual/refusal specialization
+- `logs/stage_e_training.log` and `stage_e_history.json` — Stage-E behavior repair
+- `logs/stage_f_training.log` — final Stage-F repair
+
+Final reported Stage-F candidate:
+
+```text
+Factual accuracy      : 84.1%
+Conversation semantic : 75.0%
+Conversation exact    : 75.0%
+Unknown/refusal       : 100.0%
+```
+
+These are controlled held-out results, not open-ended general-QA accuracy.
