@@ -1,0 +1,15 @@
+{
+  "project": "TinyChat-F427",
+  "stage": "D-v2",
+  "training_examples": 956,
+  "knowledge_training_examples": 716,
+  "refusal_training_examples": 240,
+  "math_facts_total": 120,
+  "math_facts_train": 91,
+  "math_facts_holdout": 29,
+  "paraphrase_eval_examples": 179,
+  "arithmetic_holdout_examples": 29,
+  "unknown_holdout_examples": 25,
+  "context": 128,
+  "objective": "assistant_response_only"
+}
