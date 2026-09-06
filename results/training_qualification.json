@@ -1,0 +1,84 @@
+{
+  "project": "TinyChat-F427",
+  "parameters": 1206864,
+  "threads": 4,
+  "batch_size": 32,
+  "context": 128,
+  "steps_per_candidate": 400,
+  "warmup_steps": 40,
+  "gradient_clip": 1.0,
+  "model_seed": 427,
+  "data_seed": 20260905,
+  "results": [
+    {
+      "learning_rate": 0.0003,
+      "initial_validation_loss": 6.95142122109731,
+      "final_validation_loss": 4.338294883569082,
+      "source_validation_losses": {
+        "wikitext": 4.4733452796936035,
+        "oasst1": 4.611437797546387,
+        "dolly": 4.43552827835083,
+        "squad": 3.3386974334716797
+      },
+      "max_preclip_grad_norm": 2.040390968322754,
+      "tokens_processed": 1638400,
+      "seconds": 120.62909209900045,
+      "tokens_per_second": 13582.129911542093,
+      "stable": true
+    },
+    {
+      "learning_rate": 0.0006,
+      "initial_validation_loss": 6.95142122109731,
+      "final_validation_loss": 3.8998337388038635,
+      "source_validation_losses": {
+        "wikitext": 4.0380473136901855,
+        "oasst1": 4.122079849243164,
+        "dolly": 3.981679916381836,
+        "squad": 2.9326844215393066
+      },
+      "max_preclip_grad_norm": 1.8565564155578613,
+      "tokens_processed": 1638400,
+      "seconds": 128.8222997769999,
+      "tokens_per_second": 12718.294913506288,
+      "stable": true
+    },
+    {
+      "learning_rate": 0.001,
+      "initial_validation_loss": 6.95142122109731,
+      "final_validation_loss": 3.72902242342631,
+      "source_validation_losses": {
+        "wikitext": 3.858220338821411,
+        "oasst1": 3.9412949085235596,
+        "dolly": 3.8238723278045654,
+        "squad": 2.8036019802093506
+      },
+      "max_preclip_grad_norm": 2.683816432952881,
+      "tokens_processed": 1638400,
+      "seconds": 130.4618203189998,
+      "tokens_per_second": 12558.463433929197,
+      "stable": true
+    },
+    {
+      "learning_rate": 0.0015,
+      "initial_validation_loss": 6.95142122109731,
+      "final_validation_loss": 3.706753700971603,
+      "source_validation_losses": {
+        "wikitext": 3.840217113494873,
+        "oasst1": 3.9135587215423584,
+        "dolly": 3.7852532863616943,
+        "squad": 2.7785792350769043
+      },
+      "max_preclip_grad_norm": 1.6955362558364868,
+      "tokens_processed": 1638400,
+      "seconds": 136.452439916,
+      "tokens_per_second": 12007.113987911081,
+      "stable": true
+    }
+  ],
+  "ranked_learning_rates": [
+    0.0015,
+    0.001,
+    0.0006,
+    0.0003
+  ]
+}
