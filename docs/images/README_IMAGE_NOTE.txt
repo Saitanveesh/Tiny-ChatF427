@@ -1,1 +1,0 @@
-Pixhawk / STM32F427 hardware image for the project README is stored alongside this note as pixhawk_stm32f427.jpg.
