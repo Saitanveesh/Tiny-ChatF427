@@ -1,0 +1,14 @@
+TinyChat-F427 Stage-F final candidate
+
+Best step             : 250
+Factual accuracy      : 84.1%
+Conversation semantic : 75.0%
+Conversation exact    : 75.0%
+Unknown/refusal       : 100.0%
+Max pre-clip gradient : 1.837
+Elapsed minutes       : 5.84
+
+Final checkpoint:
+checkpoints/tinychat_f427_final_trained_fp32.pt
+
+These are controlled held-out metrics, not unrestricted general-QA accuracy.
