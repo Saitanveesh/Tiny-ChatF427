@@ -1,0 +1,23 @@
+{
+  "project": "TinyChat-F427",
+  "vocab_size": 1024,
+  "special_tokens": {
+    "<BOS>": 0,
+    "<EOS>": 1,
+    "<USER>": 2,
+    "<ASSISTANT>": 3,
+    "<EOT>": 4
+  },
+  "byte_alphabet_size": 256,
+  "sample_documents": 10000,
+  "sample_characters": 6499163,
+  "sample_bytes": 6510714,
+  "sample_tokens": 2550490,
+  "characters_per_token": 2.5482017181012275,
+  "bytes_per_token": 2.5527306517571136,
+  "sha256": {
+    "tokenizer/tokenizer.json": "e0ab232a332b5f1f9b55094e21c97e69350b2f8045e6d49de935a61a2dd52c85",
+    "tokenizer/tinychat-vocab.json": "51ee2ed1a4cb37d248481192035f9b8eea7c99df919d17d0a90d6212e78d1ccb",
+    "tokenizer/tinychat-merges.txt": "060d243d1a67476e1338ff93243592bbae7cf199de2e7856265b877808fd37cb"
+  }
+}
