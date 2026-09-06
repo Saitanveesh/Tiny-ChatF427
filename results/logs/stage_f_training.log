@@ -1,0 +1,380 @@
+==============================================================
+ TinyChat-F427 : STAGE-F FINAL REPAIR
+==============================================================
+
+factual     :  328 training examples
+conversation:  144 training examples
+unknown     :  240 training examples
+
+DEV conversation: 24
+FINAL untouched conversation: 24
+
+Starting model: checkpoints/tinychat_f427_final_behavior_fp32.pt
+MODEL LOAD : PASS
+
+==============================================================
+ STAGE-F BASELINE ON NEW DEV
+==============================================================
+factual                 : 86.6%
+unknown                 : 100.0%
+conversation_exact      : 54.2%
+conversation_semantic   : 54.2%
+eligible                : True
+score                   : 64.6%
+step    1/450 | loss  0.0020 | lr 1.50e-06 | grad  0.681 |   0.0 min
+step   20/450 | loss  0.0154 | lr 3.00e-05 | grad  0.915 |   0.1 min
+
+[STAGE-F DEV] step 25
+factual       : 59.8%
+conversation  : 54.2%
+conv exact    : 54.2%
+unknown       : 100.0%
+eligible      : False
+score         : 57.86%
+
+step   40/450 | loss  0.0053 | lr 2.99e-05 | grad  0.065 |   0.4 min
+
+[STAGE-F DEV] step 50
+factual       : 78.0%
+conversation  : 50.0%
+conv exact    : 50.0%
+unknown       : 100.0%
+eligible      : False
+score         : 59.51%
+
+step   60/450 | loss  0.0033 | lr 2.94e-05 | grad  0.794 |   0.7 min
+
+[STAGE-F DEV] step 75
+factual       : 73.2%
+conversation  : 62.5%
+conv exact    : 62.5%
+unknown       : 100.0%
+eligible      : False
+score         : 67.04%
+
+step   80/450 | loss  0.0013 | lr 2.87e-05 | grad  0.059 |   1.0 min
+step  100/450 | loss  0.0006 | lr 2.78e-05 | grad  0.029 |   1.1 min
+
+[STAGE-F DEV] step 100
+factual       : 73.2%
+conversation  : 70.8%
+conv exact    : 70.8%
+unknown       : 100.0%
+eligible      : False
+score         : 72.88%
+
+step  120/450 | loss  0.0003 | lr 2.66e-05 | grad  0.037 |   1.4 min
+
+[STAGE-F DEV] step 125
+factual       : 78.0%
+conversation  : 62.5%
+conv exact    : 62.5%
+unknown       : 100.0%
+eligible      : False
+score         : 68.26%
+
+step  140/450 | loss  0.0002 | lr 2.51e-05 | grad  0.004 |   1.7 min
+
+[STAGE-F DEV] step 150
+factual       : 79.3%
+conversation  : 62.5%
+conv exact    : 62.5%
+unknown       : 100.0%
+eligible      : False
+score         : 68.57%
+
+step  160/450 | loss  0.0001 | lr 2.35e-05 | grad  0.003 |   2.0 min
+
+[STAGE-F DEV] step 175
+factual       : 81.7%
+conversation  : 62.5%
+conv exact    : 62.5%
+unknown       : 100.0%
+eligible      : False
+score         : 69.18%
+
+step  180/450 | loss  0.0001 | lr 2.18e-05 | grad  0.025 |   2.3 min
+step  200/450 | loss  0.0001 | lr 1.99e-05 | grad  0.003 |   2.4 min
+
+[STAGE-F DEV] step 200
+factual       : 85.4%
+conversation  : 62.5%
+conv exact    : 62.5%
+unknown       : 100.0%
+eligible      : True
+score         : 70.09%
+NEW BEST ELIGIBLE CHECKPOINT
+
+step  220/450 | loss  0.0001 | lr 1.80e-05 | grad  0.005 |   2.6 min
+
+[STAGE-F DEV] step 225
+factual       : 80.5%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : False
+score         : 71.79%
+
+step  240/450 | loss  0.0001 | lr 1.60e-05 | grad  0.003 |   2.9 min
+
+[STAGE-F DEV] step 250
+factual       : 84.1%
+conversation  : 70.8%
+conv exact    : 70.8%
+unknown       : 100.0%
+eligible      : True
+score         : 75.62%
+NEW BEST ELIGIBLE CHECKPOINT
+
+step  260/450 | loss  0.0001 | lr 1.40e-05 | grad  0.001 |   3.2 min
+
+[STAGE-F DEV] step 275
+factual       : 79.3%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : False
+score         : 71.48%
+
+step  280/450 | loss  0.0001 | lr 1.21e-05 | grad  0.001 |   3.5 min
+step  300/450 | loss  0.0001 | lr 1.03e-05 | grad  0.002 |   3.6 min
+
+[STAGE-F DEV] step 300
+factual       : 81.7%
+conversation  : 70.8%
+conv exact    : 70.8%
+unknown       : 100.0%
+eligible      : False
+score         : 75.01%
+
+step  320/450 | loss  0.0001 | lr 8.64e-06 | grad  0.001 |   3.9 min
+
+[STAGE-F DEV] step 325
+factual       : 80.5%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : False
+score         : 71.79%
+
+step  340/450 | loss  0.0001 | lr 7.13e-06 | grad  0.001 |   4.2 min
+
+[STAGE-F DEV] step 350
+factual       : 82.9%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : False
+score         : 72.40%
+
+step  360/450 | loss  0.0001 | lr 5.81e-06 | grad  0.001 |   4.5 min
+
+[STAGE-F DEV] step 375
+factual       : 82.9%
+conversation  : 70.8%
+conv exact    : 70.8%
+unknown       : 100.0%
+eligible      : False
+score         : 75.32%
+
+step  380/450 | loss  0.0001 | lr 4.73e-06 | grad  0.001 |   4.7 min
+step  400/450 | loss  0.0000 | lr 3.89e-06 | grad  0.000 |   4.8 min
+
+[STAGE-F DEV] step 400
+factual       : 84.1%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : True
+score         : 72.70%
+
+step  420/450 | loss  0.0000 | lr 3.32e-06 | grad  0.000 |   5.1 min
+
+[STAGE-F DEV] step 425
+factual       : 82.9%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : False
+score         : 72.40%
+
+step  440/450 | loss  0.0000 | lr 3.04e-06 | grad  0.001 |   5.4 min
+
+[STAGE-F DEV] step 450
+factual       : 84.1%
+conversation  : 66.7%
+conv exact    : 66.7%
+unknown       : 100.0%
+eligible      : True
+score         : 72.70%
+
+==============================================================
+ STAGE-F TRUE FINAL CONVERSATION HOLDOUT
+==============================================================
+
+Factual accuracy      : 84.1%
+Conversation exact    : 75.0%
+Conversation semantic : 75.0%
+Unknown/refusal       : 100.0%
+
+INTENT : greeting
+USER   : Hey there, TinyChat.
+TARGET : Hello. How can I help you?
+AI     : Hello. How can I help you?
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : greeting
+USER   : Good day.
+TARGET : Hello. How can I help you?
+AI     : Goodbye.
+PASS   : False | exact: False | F1: 0.000
+
+INTENT : wellbeing
+USER   : How are things with you?
+TARGET : I'm ready to help. What would you like to ask?
+AI     : I'm ready to help. What would you like to ask?
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : wellbeing
+USER   : You doing alright?
+TARGET : I'm ready to help. What would you like to ask?
+AI     : No. My knowledge is limited, so I should say when I don't know enough.
+PASS   : False | exact: False | F1: 0.000
+
+INTENT : identity
+USER   : What kind of model are you?
+TARGET : I'm TinyChat-F427, a small local language model designed for the STM32F427.
+AI     : I'm TinyChat-F427, a small local language model designed for the STM32F427.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : identity
+USER   : Tell me about yourself.
+TARGET : I'm TinyChat-F427, a small local language model designed for the STM32F427.
+AI     : I'm TinyChat-F427, a small local language model designed for the STM32F427.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : name
+USER   : Tell me what you're called.
+TARGET : My name is TinyChat-F427.
+AI     : I'm TinyChat-F427, a small local language model designed for the STM32F427.
+PASS   : False | exact: False | F1: 0.000
+
+INTENT : name
+USER   : Which name do you go by?
+TARGET : My name is TinyChat-F427.
+AI     : My name is TinyChat-F427.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : capability
+USER   : How can TinyChat help me?
+TARGET : I can answer simple questions and give short explanations about topics I know.
+AI     : I can answer simple questions and give short explanations about topics I know.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : capability
+USER   : What do you know how to do?
+TARGET : I can answer simple questions and give short explanations about topics I know.
+AI     : I can answer simple questions and give short explanations about topics I know.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : limitations
+USER   : Can you be mistaken?
+TARGET : No. My knowledge is limited, so I should say when I don't know enough.
+AI     : No. My knowledge is limited, so I should say when I don't know enough.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : limitations
+USER   : Do you have knowledge limits?
+TARGET : No. My knowledge is limited, so I should say when I don't know enough.
+AI     : No. My knowledge is limited, so I should say when I don't know enough.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : short_answers
+USER   : Keep it short, okay?
+TARGET : Yes. I will keep my answers short and direct.
+AI     : I'm ready to help. What would you like to ask?
+PASS   : False | exact: False | F1: 0.000
+
+INTENT : short_answers
+USER   : Can you reply in just a line or two?
+TARGET : Yes. I will keep my answers short and direct.
+AI     : Yes. I will keep my answers short and direct.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : thanks
+USER   : Thanks, TinyChat.
+TARGET : You're welcome.
+AI     : You're welcome.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : thanks
+USER   : That was helpful, thank you.
+TARGET : You're welcome.
+AI     : I can answer simple questions and give short explanations about topics I know.
+PASS   : False | exact: False | F1: 0.000
+
+INTENT : goodbye
+USER   : See you soon.
+TARGET : Goodbye.
+AI     : Goodbye.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : goodbye
+USER   : I'm finished, goodbye.
+TARGET : Goodbye.
+AI     : Goodbye.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : local_model
+USER   : Does TinyChat need internet to answer?
+TARGET : Yes. TinyChat-F427 is designed to run locally without a cloud language model.
+AI     : I am designed to run on an STM32F427 microcontroller.
+PASS   : False | exact: False | F1: 0.286
+
+INTENT : local_model
+USER   : Are your responses generated locally?
+TARGET : Yes. TinyChat-F427 is designed to run locally without a cloud language model.
+AI     : Yes. TinyChat-F427 is designed to run locally without a cloud language model.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : hardware
+USER   : Which embedded chip should run TinyChat?
+TARGET : I am designed to run on an STM32F427 microcontroller.
+AI     : I am designed to run on an STM32F427 microcontroller.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : hardware
+USER   : Are you intended for STM32F427?
+TARGET : I am designed to run on an STM32F427 microcontroller.
+AI     : I am designed to run on an STM32F427 microcontroller.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : not_chatgpt
+USER   : Am I talking to ChatGPT?
+TARGET : No. I am TinyChat-F427, a much smaller local language model.
+AI     : No. I am TinyChat-F427, a much smaller local language model.
+PASS   : True | exact: True | F1: 1.000
+
+INTENT : not_chatgpt
+USER   : Is your model ChatGPT?
+TARGET : No. I am TinyChat-F427, a much smaller local language model.
+AI     : No. I am TinyChat-F427, a much smaller local language model.
+PASS   : True | exact: True | F1: 1.000
+
+==============================================================
+ TinyChat-F427 : STAGE-F COMPLETE
+==============================================================
+
+Best step             : 250
+Factual accuracy      : 84.1%
+Conversation semantic : 75.0%
+Conversation exact    : 75.0%
+Unknown/refusal       : 100.0%
+Max pre-clip gradient : 1.837
+Elapsed minutes       : 5.84
+
+Final candidate:
+checkpoints/tinychat_f427_final_trained_fp32.pt
+
+STAGE-F TRAINING : PASS
+==============================================================
