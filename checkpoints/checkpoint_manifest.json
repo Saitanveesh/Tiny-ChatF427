@@ -1,0 +1,30 @@
+{
+  "project": "TinyChat-F427",
+  "format": "PyTorch state/checkpoint files",
+  "artifacts": [
+    {
+      "path": "checkpoints/tinychat_f427_baseline_30M.pt",
+      "bytes": 4849497,
+      "sha256": "089b72b339c5edc56877214b2a028b97af5e94867c2cb2c5caec608cc31b7a5c",
+      "role": "frozen 30M-token baseline"
+    },
+    {
+      "path": "checkpoints/tinychat_f427_final_behavior_fp32.pt",
+      "bytes": 4849927,
+      "sha256": "45fb31d67ff04d9720e94fab93d096e08c60b7fe9f183355cac99c40553f3b8f",
+      "role": "Stage-E behavior candidate"
+    },
+    {
+      "path": "checkpoints/stageF_best.pt",
+      "bytes": 4848243,
+      "sha256": "2ef10c65d829fd2457ae87b3173739be6f6ddb9505d67e18e057b4e269d06d58",
+      "role": "best Stage-F checkpoint"
+    },
+    {
+      "path": "checkpoints/tinychat_f427_final_trained_fp32.pt",
+      "bytes": 4849865,
+      "sha256": "3e34e93bb58680df6e0269659ed90ad553740122a74963dfea83706aad3e4768",
+      "role": "final frozen FP32 candidate"
+    }
+  ]
+}
