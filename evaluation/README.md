@@ -1,11 +1,9 @@
 # Evaluation
 
-The evaluation scripts separate controlled benchmark behavior from unrestricted free-form behavior.
+This directory contains the **analysis script currently published**:
 
-- `evaluate_nonmath.py` measures non-math controlled factual QA by category.
-- `analyze_stage_d_results.py` inspects the composition of the Stage-D paraphrase set.
-- `inspect_stage_e_conversation.py` prints held-out conversational intent responses for manual inspection.
+- `analyze_stage_d_results.py` — analysis of an earlier Stage-D evaluation set.
 
-The compact held-out JSON sets are stored under `data/eval/`.
+The historical documentation references `evaluate_nonmath.py` and `inspect_stage_e_conversation.py`. Those scripts are **not currently included** in this public snapshot. Some held-out fixture JSON files are available under `data/eval/`, but the entire reported Stage-F evaluation cannot be reproduced from a clean clone.
 
-Important: controlled benchmark accuracy is not presented as general conversational accuracy. The final project explicitly records that free-form questioning exposed severe intent and knowledge failures despite strong bounded-test scores.
+Read [the evaluation report](../docs/EVALUATION.md) to understand the controlled metrics and the documented unrestricted failure cases. Controlled accuracy is **not** general conversational accuracy.

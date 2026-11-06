@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="392" viewBox="0 0 1200 392" role="img" aria-labelledby="title desc">
+<title id="title">TinyChat-F427 — small model, hard limits</title>
+<desc id="desc">A dark navy technical illustration showing a compact Transformer and an STM32 microcontroller, with project specifications.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071525"/><stop offset=".55" stop-color="#0a2033"/><stop offset="1" stop-color="#06111e"/></linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4ce3c5"/><stop offset="1" stop-color="#5ea9ff"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#1f8b91" stop-opacity=".28"/><stop offset="1" stop-color="#1f8b91" stop-opacity="0"/></radialGradient>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#66b6cf" stroke-opacity=".065"/></pattern>
+</defs>
+<rect width="1200" height="392" rx="22" fill="url(#bg)"/>
+<rect width="1200" height="392" rx="22" fill="url(#grid)"/>
+<circle cx="948" cy="176" r="270" fill="url(#glow)"/>
+<path d="M40 40h56M40 40v56M1160 352h-56M1160 352v-56" stroke="#50d6c2" stroke-opacity=".33" stroke-width="2" fill="none"/>
+<g font-family="Arial, Helvetica, sans-serif">
+ <rect x="62" y="51" width="161" height="27" rx="13.5" fill="#123d4c" stroke="#2e898e"/>
+ <circle cx="78" cy="64.5" r="4" fill="#55ebc8"/>
+ <text x="92" y="69" fill="#b5f8e8" font-size="12" font-weight="700" letter-spacing="1.3">EMBEDDED AI LAB</text>
+ <text x="59" y="153" font-size="65" font-weight="800" letter-spacing="-2" fill="#ffffff">TinyChat<tspan fill="#5de4c7">-F427</tspan></text>
+ <text x="63" y="193" font-size="23" font-weight="600" fill="#c6d9e8">Small model. Hard limits.</text>
+ <text x="63" y="231" font-size="16" fill="#a5bed1">A from-scratch Transformer exploring language generation</text>
+ <text x="63" y="256" font-size="16" fill="#a5bed1">within STM32F427-class memory constraints.</text>
+ <g transform="translate(63,298)">
+  <rect width="153" height="47" rx="10" fill="#122c3d" stroke="#31516a"/>
+  <text x="14" y="20" fill="#62e8d0" font-size="19" font-weight="700">1.206M</text><text x="14" y="36" fill="#9dbacb" font-size="10" letter-spacing="1.3">PARAMETERS</text>
+  <rect x="166" width="153" height="47" rx="10" fill="#122c3d" stroke="#31516a"/>
+  <text x="180" y="20" fill="#62e8d0" font-size="19" font-weight="700">128</text><text x="180" y="36" fill="#9dbacb" font-size="10" letter-spacing="1.3">TOKEN CONTEXT</text>
+  <rect x="332" width="153" height="47" rx="10" fill="#122c3d" stroke="#31516a"/>
+  <text x="346" y="20" fill="#62e8d0" font-size="19" font-weight="700">Cortex-M4</text><text x="346" y="36" fill="#9dbacb" font-size="10" letter-spacing="1.3">TARGET CLASS</text>
+ </g>
+</g>
+<g transform="translate(815,70)">
+  <rect x="36" y="24" width="243" height="237" rx="23" fill="#0e2738" stroke="#4dbad1" stroke-opacity=".55" stroke-width="2"/>
+  <rect x="66" y="55" width="183" height="175" rx="13" fill="#133449" stroke="#3ac5bf" stroke-width="2"/>
+  <path d="M83 82h149M83 202h149" stroke="#61c4d4" stroke-opacity=".2"/>
+  <g fill="#4ec8c7">
+    <rect x="16" y="52" width="23" height="8" rx="3"/><rect x="16" y="85" width="23" height="8" rx="3"/><rect x="16" y="118" width="23" height="8" rx="3"/><rect x="16" y="151" width="23" height="8" rx="3"/><rect x="16" y="184" width="23" height="8" rx="3"/><rect x="16" y="217" width="23" height="8" rx="3"/>
+    <rect x="277" y="52" width="23" height="8" rx="3"/><rect x="277" y="85" width="23" height="8" rx="3"/><rect x="277" y="118" width="23" height="8" rx="3"/><rect x="277" y="151" width="23" height="8" rx="3"/><rect x="277" y="184" width="23" height="8" rx="3"/><rect x="277" y="217" width="23" height="8" rx="3"/>
+    <rect x="66" y="8" width="8" height="18" rx="3"/><rect x="99" y="8" width="8" height="18" rx="3"/><rect x="132" y="8" width="8" height="18" rx="3"/><rect x="165" y="8" width="8" height="18" rx="3"/><rect x="198" y="8" width="8" height="18" rx="3"/><rect x="231" y="8" width="8" height="18" rx="3"/>
+    <rect x="66" y="259" width="8" height="18" rx="3"/><rect x="99" y="259" width="8" height="18" rx="3"/><rect x="132" y="259" width="8" height="18" rx="3"/><rect x="165" y="259" width="8" height="18" rx="3"/><rect x="198" y="259" width="8" height="18" rx="3"/><rect x="231" y="259" width="8" height="18" rx="3"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+   <text x="157" y="110" font-size="12" letter-spacing="2" fill="#71daca">TRANSFORMER</text>
+   <text x="157" y="146" font-size="39" font-weight="800" fill="#fff">6<tspan fill="#58e2c8">×</tspan></text>
+   <text x="157" y="170" font-size="15" font-weight="700" fill="#d8eaf0">Decoder Blocks</text>
+   <text x="157" y="193" font-size="12" fill="#a3c1d1">MQA · RoPE · SwiGLU</text>
+   <text x="157" y="305" font-size="12" font-weight="700" letter-spacing="2" fill="#9ac6d5">STM32F427 RESEARCH TARGET</text>
+  </g>
+</g>
+</svg>

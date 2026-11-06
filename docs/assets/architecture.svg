@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="275" viewBox="0 0 1100 275" role="img" aria-labelledby="title desc">
+<title id="title">TinyChat-F427 model data flow</title><desc id="desc">Input text passes through a 1024-token byte-level BPE tokenizer, six decoder blocks with causal multi-query attention, and a tied output head to predict the next token. Quantized MCU inference remains future work.</desc>
+<defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3L0 6" fill="none" stroke="#37bda6" stroke-width="1.5"/></marker></defs>
+<rect width="1100" height="275" rx="16" fill="#091a2b"/>
+<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle">
+<rect x="38" y="66" width="185" height="107" rx="14" fill="#13344a" stroke="#3c718b"/>
+<text x="130" y="106" font-size="19" font-weight="700" fill="#fff">Input text</text><text x="130" y="134" font-size="13" fill="#b3d1df">Byte-level BPE</text><text x="130" y="155" font-size="12" fill="#75dec8">1,024 tokens</text>
+<rect x="304" y="49" width="485" height="141" rx="16" fill="#113445" stroke="#3ac8b4" stroke-width="2"/>
+<rect x="328" y="78" width="437" height="82" rx="11" fill="#164758" stroke="#5de0c5"/>
+<text x="546" y="106" font-size="19" font-weight="700" fill="#fff">6 × decoder blocks</text>
+<text x="546" y="135" font-size="13" fill="#b9d8e3">Causal MQA  ·  RoPE  ·  RMSNorm  ·  SwiGLU</text>
+<rect x="871" y="66" width="191" height="107" rx="14" fill="#13344a" stroke="#3c718b"/>
+<text x="966" y="105" font-size="19" font-weight="700" fill="#fff">Next token</text><text x="966" y="134" font-size="13" fill="#b3d1df">Tied LM head</text><text x="966" y="155" font-size="12" fill="#75dec8">Autoregressive</text>
+<text x="550" y="239" font-size="13" fill="#a6c6d6">PC reference available  ·  Quantized STM32F427 port: in progress</text>
+</g><path d="M226 120H293M792 120H859" fill="none" stroke="#43ceb8" stroke-width="3" marker-end="url(#arr)"/>
+</svg>
