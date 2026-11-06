@@ -1,305 +1,172 @@
-# TinyChat-F427
-
-**A from-scratch 1.206M-parameter autoregressive Transformer built around the limits of an STM32F427-class Cortex-M4 system.**
-
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Parameters](https://img.shields.io/badge/Parameters-1.206M-informational)
-![Context](https://img.shields.io/badge/Context-128%20tokens-informational)
-![Target](https://img.shields.io/badge/Target-STM32F427%20Cortex--M4-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
-
-TinyChat-F427 explores a simple but difficult question:
-
-> **How much useful short-form language behavior can be retained when an autoregressive model is designed for a microcontroller-class platform with roughly 2 MB of internal Flash and 256 KB of SRAM, without cloud inference, external PSRAM, or SD-card model streaming?**
-
-The project includes the model architecture, tokenizer, corpus pipeline, full training path, specialization stages, evaluation scripts, PC-side inference, checkpoints, logs, and STM32/Pixhawk hardware bring-up work.
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="TinyChat-F427 — small model, hard limits; a from-scratch 1.206M-parameter Transformer for STM32F427-class constraints" width="100%">
+</p>
 
 <p align="center">
-  <img src="docs/images/pixhawk_stm32f427.jpg" alt="Pixhawk STM32F427 target hardware" width="520">
+  <a href="#get-started">Get started</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#results--limitations">Results</a> ·
+  <a href="docs/ROADMAP.md">Roadmap</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a>
 </p>
-<p align="center"><em>Pixhawk-class STM32F427 hardware used as the embedded target during hardware bring-up.</em></p>
 
-> **Current status:** the final 1.206M-parameter Transformer is trained and evaluated on PC. The earlier TinyLM firmware and hardware diagnostics established the STM32F427 execution path. The final Transformer checkpoint has not yet been demonstrated end-to-end on the MCU, so this repository does not claim completed Transformer deployment on hardware.
+<p align="center">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-25c6a5?style=flat-square"></a>
+  <img alt="Python 3.10 and newer" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square">
+  <img alt="1.206M parameters" src="https://img.shields.io/badge/parameters-1.206M-5865F2?style=flat-square">
+  <img alt="STM32F427 target" src="https://img.shields.io/badge/target-STM32F427-F59E0B?style=flat-square">
+  <a href="https://github.com/Saitanveesh/Tiny-ChatF427/issues"><img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-22C55E?style=flat-square"></a>
+</p>
 
----
+<p align="center"><strong>What happens when you design a language model around a microcontroller's memory budget instead of a GPU?</strong></p>
 
-## Why this project exists
+**TinyChat-F427** is an open-source research project exploring compact autoregressive language generation for **STM32F427-class Arm Cortex-M4 hardware**. It provides a from-scratch Transformer, a 1,024-token tokenizer, PC reference inference, recorded experiments, and the design constraints for a future on-device implementation.
 
-Most language-model work assumes hardware with far more memory than a conventional Cortex-M4 microcontroller. TinyChat-F427 deliberately starts from the opposite direction: the hardware limit is fixed first, then the model is designed around it.
+> [!IMPORTANT]
+> **Project stage: PC-trained reference model; MCU Transformer deployment not yet demonstrated.** Earlier small neural models and hardware tests ran on STM32F427-class hardware. The final 1,206,864-parameter Transformer has **not** been shown running end-to-end on the board. The final FP32 checkpoint is **not included** in this public repository snapshot, so interactive chat requires a separately supplied checkpoint.
 
-This makes the project useful for studying the boundary between:
+## Why this is interesting
 
-- a model that **fits a severe embedded budget**, and
-- a model that is actually **reliable enough to behave like a useful language interface**.
+Most language-model projects begin with available compute. TinyChat-F427 begins with a hard constraint: an MCU class with **up to 2 MB on-chip Flash, approximately 256 KB SRAM, and no NPU**.
 
-The project therefore treats failures as results too. A model can score well on a narrow held-out benchmark while still failing badly on unrestricted questions.
+- **Learn:** inspect a compact decoder-only Transformer without a giant framework.
+- **Measure:** explore what storage, KV cache, context length, and quantization imply for embedded inference.
+- **Reproduce what is available:** inspect tokenizer artifacts, model code, controlled evaluation data, and recorded training results.
+- **Help build the next step:** contribute quantized kernels, memory instrumentation, tests, or clearer reproducibility tools.
 
----
+This is a systems and research prototype—not a general-purpose chat assistant or a finished embedded product.
 
-## Model at a glance
+## Project snapshot
 
-| Property | TinyChat-F427 |
-|---|---:|
-| Architecture | Decoder-only Transformer |
-| Trainable parameters | **1,206,864** |
-| Initialization | Random / from scratch |
-| Vocabulary | **1,024-token byte-level BPE** |
-| Context length | **128 tokens** |
-| Transformer blocks | **6** |
-| Model width | **144** |
-| Query heads | **4** |
-| KV heads | **1** |
-| Attention type | Multi-Query Attention |
-| Head dimension | **36** |
-| FFN | SwiGLU |
-| FFN width | **288** |
-| Normalization | Pre-RMSNorm |
-| Position encoding | RoPE |
-| Embedding / LM head | Tied |
-| Linear biases | None |
+| Area | Status | What is available |
+|:--|:--|:--|
+| Transformer architecture | **Implemented** | Importable PyTorch model; exact parameter accounting |
+| Tokenizer | **Available** | Frozen byte-level BPE, vocabulary and merges |
+| PC inference | **Code available** | Interactive script; separate checkpoint required |
+| Recorded training and evaluation | **Documented** | Results, selected data, logs and historical notes |
+| STM32F427 hardware bring-up | **Documented** | Serial / compute tests and earlier tiny neural inference |
+| Final quantized Transformer on MCU | **Open milestone** | No verified end-to-end firmware, latency or SRAM measurements |
 
-### Parameter accounting
+Follow the [live project status](docs/PROJECT_STATUS.md) and [development roadmap](docs/ROADMAP.md).
 
-```text
-Token embedding      147,456
-6 Transformer blocks 1,059,264
-Final RMSNorm             144
---------------------------------
-Total                1,206,864
-```
+## Architecture
 
-The architecture is intentionally compact. MQA, tied embeddings, the small vocabulary, and the 128-token context were chosen to reduce storage and runtime memory pressure rather than to introduce a new Transformer primitive.
+<p align="center">
+  <img src="docs/assets/architecture.svg" alt="Tokenizer to six decoder blocks to next-token prediction. PC reference is available; MCU Transformer port is in progress." width="100%">
+</p>
 
----
+| Specification | Value | Specification | Value |
+|---|---:|---|---:|
+| Parameters | **1,206,864** | Context length | **128** tokens |
+| Transformer blocks | **6** | Model width | **144** |
+| Query heads | **4** | KV heads | **1** |
+| FFN width | **288** | Vocabulary | **1,024** |
+| Attention | Causal multi-query | Positional encoding | RoPE |
+| Feed-forward | SwiGLU | Normalization | Pre-RMSNorm |
+| LM head | Tied embedding | Weight initialization | From scratch |
 
-## Training path
+Architecture choices deliberately trade capability for a tighter memory envelope. For example, **INT8 weight storage is ~1.21 MB before scales and code**, while a 128-token, 6-layer, single-KV-head INT8 cache would hold **55,296 bytes of raw KV values**. Both are *estimates*, not measured firmware footprints.
 
-TinyChat-F427 was trained from random initialization. No pretrained language-model weights were used.
+For formulas and exact parameter accounting, read [Architecture](docs/ARCHITECTURE.md) and [Hardware target](docs/HARDWARE_TARGET.md).
 
-The main corpus pipeline uses:
+## Get started
 
-- WikiText-103
-- OpenAssistant OASST1
-- Databricks Dolly 15k
-- SQuAD
+The code can be explored on a normal computer. **You do not need an STM32 board to inspect the architecture.**
 
-A custom byte-level BPE tokenizer was trained from scratch with five control tokens:
-
-```text
-<BOS> <EOS> <USER> <ASSISTANT> <EOT>
-```
-
-The final pretraining run processed:
-
-```text
-30,003,200 tokens
-```
-
-The recorded final validation loss of the 30M baseline was:
-
-```text
-2.7485
-```
-
-Later stages introduced assistant-only loss, short-answer behavior, factual rehearsal, conversation repair, and explicit refusal training.
-
-See [docs/TRAINING.md](docs/TRAINING.md) for the stage-by-stage path.
-
----
-
-## Controlled evaluation
-
-The final Stage-F checkpoint produced the following results on the controlled evaluation sets:
-
-| Test | Result |
-|---|---:|
-| Factual QA, controlled non-math | **84.1%** |
-| Held-out conversation semantic accuracy | **75.0%** |
-| Held-out conversation exact accuracy | **75.0%** |
-| Synthetic unknown/refusal | **100.0%** |
-| Stage-D unseen arithmetic | **14.3%** |
-
-These values describe the specific held-out evaluation sets included with the project. They are **not general-knowledge accuracy numbers**.
-
-### The important failure case
-
-A separate unrestricted terminal test exposed severe semantic failures. Examples included:
-
-```text
-USER: what is speed of light
-AI:   The heart pumps blood through the body.
-
-USER: are you gpt
-AI:   Gravity.
-
-USER: define speed
-AI:   Goodbye.
-```
-
-That gap is central to the project: **bounded benchmark performance does not automatically translate into robust open-ended conversation at this model scale.**
-
-See [docs/EVALUATION.md](docs/EVALUATION.md).
-
----
-
-## Hardware target
-
-TinyChat-F427 targets the STM32F427 / Pixhawk 2.4.8 class of hardware.
-
-Relevant device-class constraints are:
-
-```text
-CPU      Arm Cortex-M4 + FPU
-Clock    up to 180 MHz
-Flash    up to 2 MB
-SRAM     up to 256+4 KB
-NPU      none
-PSRAM    not used for the target claim
-SD model streaming  not used
-Cloud inference     not used
-```
-
-The project intentionally uses a legacy, non-accelerated MCU target because the point is to explore how far autoregressive language generation can be pushed under a genuinely small on-chip memory envelope.
-
-See [docs/HARDWARE_TARGET.md](docs/HARDWARE_TARGET.md).
-
----
-
-## What already ran on STM32F427
-
-Before the Transformer work, the hardware path was validated using smaller firmware experiments:
-
-- custom UART / USB serial communication
-- integer execution
-- floating-point execution
-- SRAM buffer tests
-- stable heartbeat execution
-- a **2,994-parameter character RNN**
-- FP32 TinyLM inference on STM32F427
-- INT8-storage TinyLM inference experiments
-
-These experiments established that custom local neural inference and serial interaction were possible on the board. They should not be confused with completion of the final 1.206M-parameter Transformer port.
-
----
-
-## Quick start
-
-### 1. Create the environment
+**1. Clone and install (Python 3.10+)**
 
 ```bash
+git clone https://github.com/Saitanveesh/Tiny-ChatF427.git
+cd Tiny-ChatF427
 python -m venv .venv
-source .venv/bin/activate
-pip install -U pip
-pip install -e .
 ```
 
-The recorded development environment used Python 3.10.
+Activate the environment:
 
-### 2. Run the interactive PC model
+```bash
+# Linux / macOS
+source .venv/bin/activate
+
+# Windows PowerShell
+# .\.venv\Scripts\Activate.ps1
+```
+
+```bash
+python -m pip install -e .
+```
+
+**2. Verify the model without a checkpoint**
+
+```bash
+python -c "from tinychat.model import TinyChatF427, count_parameters; print(count_parameters(TinyChatF427()))"
+```
+
+Expected parameter count: **`1206864`**. This constructs the untrained architecture; it does **not** load trained weights or perform meaningful chat.
+
+**3. Optional: run the PC chat client**
+
+Obtain the final FP32 checkpoint from the project owner or your own original training archive, put it at `checkpoints/tinychat_f427_final_trained_fp32.pt`, verify its hash using [the manifest](checkpoints/checkpoint_manifest.json), then run:
 
 ```bash
 python inference/chat_tinychat.py
 ```
 
-The interactive script uses greedy decoding, a 48-token generation ceiling, a two-sentence response limit, and a deterministic router for simple arithmetic.
+The committed tokenizer is already at `tokenizer/tokenizer.json`. **The checkpoint is not downloadable from this repository at present.** See [Getting started](docs/GETTING_STARTED.md) for Windows-specific commands, validation, and troubleshooting.
 
-### 3. Verify the architecture
+## Results & limitations
 
-```bash
-python training/benchmark_architecture.py
-```
+The project preserves both promising **controlled** results and the important **unrestricted** failures:
 
-Expected output:
+| Recorded evaluation | Result |
+|---|---:|
+| Stage-F controlled factual QA (non-math) | **84.1%** |
+| Stage-F held-out conversation semantic accuracy | **75.0%** |
+| Stage-F synthetic unknown/refusal | **100.0%** |
+| Earlier Stage-D unseen arithmetic | **14.3%** |
+
+These percentages apply only to the project's small, specific evaluation sets—not arbitrary internet questions or general intelligence.
+
+A separate free-form test produced failures such as:
 
 ```text
-1,206,864 parameters
+User: are you gpt
+Model: Gravity.
 ```
 
----
+**This gap is part of the research result.** The PC chat script also routes simple arithmetic through deterministic Python code; that output must not be mistaken for neural arithmetic ability.
 
-## Reproduce the pretraining pipeline
+Read [Evaluation details](docs/EVALUATION.md) and the [recorded results](results/).
 
-Large generated corpora and packed token streams are intentionally not committed. They can be reconstructed from the source datasets using the included scripts.
+## Training & reproducibility
 
-```bash
-python training/build_corpus.py
-python training/repair_control_tokens.py
-python training/verify_corpus.py
-python training/train_tokenizer.py
-python training/audit_tokens.py
-python training/pack_tokens.py
-python training/qualify_training.py
-python training/train_full.py
-```
+Training began from random initialization using WikiText-103, OASST1, Dolly 15k and SQuAD. The recorded pretraining run consumed **30,003,200 tokens**. Later stages adapted the model for short-form response behavior.
 
-The later Stage-C through Stage-F scripts are preserved because they document the experimental progression from broad pretraining to bounded assistant behavior.
+The public snapshot includes corpus/tokenizer preparation utilities and training/evaluation records, but **not every historical trainer, specialization script, dataset tensor, or checkpoint**. Consequently, a clean clone cannot reproduce the complete final Stage-F training run or launch trained chat without additional artifacts. No external checkpoint download is currently advertised.
 
----
+See [Training history](docs/TRAINING.md), [Reproducibility](docs/REPRODUCIBILITY.md), and the [checkpoint manifest](checkpoints/checkpoint_manifest.json).
 
-## Frozen artifacts
+## Explore the repository
 
-| Artifact | SHA-256 |
+| Location | Contents |
 |---|---|
-| `tokenizer/tokenizer.json` | `e0ab232a332b5f1f9b55094e21c97e69350b2f8045e6d49de935a61a2dd52c85` |
-| `checkpoints/tinychat_f427_baseline_30M.pt` | `089b72b339c5edc56877214b2a028b97af5e94867c2cb2c5caec608cc31b7a5c` |
-| `checkpoints/tinychat_f427_final_trained_fp32.pt` | `3e34e93bb58680df6e0269659ed90ad553740122a74963dfea83706aad3e4768` |
+| [`tinychat/`](tinychat/) | PyTorch reference model |
+| [`tokenizer/`](tokenizer/) | Frozen tokenizer artifacts |
+| [`training/`](training/) | Available corpus preparation and benchmark scripts |
+| [`data/eval/`](data/eval/) | Compact evaluation fixtures |
+| [`evaluation/`](evaluation/) | Available analysis scripts |
+| [`inference/`](inference/) | PC chat client |
+| [`firmware/`](firmware/) | STM32F427 bring-up evidence and deployment boundary |
+| [`docs/`](docs/) | Architecture, hardware, results and reproducibility |
+| [`results/`](results/) | Historical run summaries and logs |
 
-Hashes are provided so experiments can be tied to exact frozen artifacts.
+## Roadmap & community
 
----
+The highest-value open milestone is **measured, quantized inference of the frozen Transformer on STM32F427**, including Flash, SRAM, tokens/second, and behavior retention. Before claiming that milestone, the project also needs public checkpoint distribution and a consistent end-to-end reproduction path.
 
-## Repository layout
+Want to contribute? Start with [the contributor guide](CONTRIBUTING.md), review [the roadmap](docs/ROADMAP.md), or [open an issue](https://github.com/Saitanveesh/Tiny-ChatF427/issues). Good first contributions include documentation fixes, architecture unit tests, host-side profiling, and memory-budget tools.
 
-```text
-tinychat/       model implementation
-training/       corpus, tokenizer, pretraining and specialization scripts
-evaluation/     controlled evaluation utilities
-inference/      interactive PC inference
-tokenizer/      frozen 1,024-token BPE
-checkpoints/    frozen model checkpoints
-data/eval/      compact held-out evaluation sets
-results/        recorded metrics, histories and logs
-docs/           architecture, training, evaluation and hardware notes
-firmware/       embedded deployment notes and firmware work
-```
+## License & responsible use
 
----
+Code is released under the [MIT License](LICENSE). Training datasets have separate licenses and terms; users must check those terms before redistributing derived artifacts. This research prototype can produce incorrect or nonsensical outputs and should not be relied upon for high-stakes decisions.
 
-## What TinyChat-F427 is — and is not
-
-### It is
-
-- a fully from-scratch tiny autoregressive Transformer experiment
-- a reproducible training and evaluation pipeline
-- a study of language-model behavior under a severe MCU-oriented memory budget
-- an open record of both successful controlled behavior and failure modes
-
-### It is not
-
-- a replacement for a general-purpose LLM
-- a reliable unrestricted knowledge assistant
-- a claim of novel MQA, RoPE, RMSNorm, or SwiGLU primitives
-- a claim that the final Transformer is already running end-to-end on STM32F427
-
----
-
-## Next embedded milestone
-
-The remaining systems milestone is a faithful quantized implementation of the frozen Transformer on the STM32F427 target, followed by direct measurement of:
-
-- Flash usage
-- peak SRAM usage
-- KV-cache footprint
-- per-token latency
-- tokens per second
-- behavioral retention after quantization
-
-Until that measurement is complete, MCU-fit calculations should be treated as design targets rather than final deployment results.
-
----
-
-## License
-
-Source code is released under the MIT License.
-
-The upstream datasets retain their own licenses and terms. Users reproducing the training pipeline are responsible for reviewing those terms, and checkpoint use should respect the licenses of the data used during training.
+<p align="center"><sub>Built to study what tiny language models can—and cannot—do on constrained hardware.</sub></p>

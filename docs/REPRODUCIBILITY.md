@@ -1,28 +1,35 @@
-# Reproducibility notes
+# Reproducibility and artifact availability
 
-The repository separates source-controlled experiment code from large generated artifacts.
+TinyChat-F427 publishes the model specification, a tokenizer, part of the corpus preparation path and historical measurements. **It is not presently an end-to-end reproducible Stage-F training release.** This distinction matters when comparing its reported results with independently repeated experiments.
 
-## Reproducible components
+## Available in the public snapshot
 
-- exact Transformer architecture and parameter count
-- tokenizer training code and frozen tokenizer vocabulary/merge files
-- corpus construction scripts
-- token packing pipeline
-- training qualification and full-training scripts
-- Stage-C through Stage-F specialization scripts
-- held-out evaluation sets
-- training histories and logs
-- PC interactive inference code
+- Importable PyTorch reference model with exact 1,206,864-parameter accounting
+- Byte-level BPE tokenizer artifacts and tokenizer training script
+- Corpus construction, repair, validation and packing scripts
+- CPU model/training benchmark script
+- Selected compact controlled evaluation fixtures
+- Historical logs, summaries, hardware documentation and checkpoint SHA-256 manifest
+- PC chat client code that loads a separately provided checkpoint
 
-## Large artifacts intentionally omitted
+## Not available in the public snapshot
 
-The following are generated locally and are not committed:
+- Large raw corpora, packed training arrays, SQLite deduplication data and generated NumPy tensors
+- Frozen baseline and Stage-F `.pt` checkpoint binaries
+- Original `train_full.py`, `qualify_training.py` and historical Stage-C–F training scripts mentioned in older notes
+- Many of the original evaluation execution scripts referenced in historical notes
+- End-to-end firmware for the final Transformer
 
-- raw corpus JSONL files
-- deduplication SQLite database
-- packed `.bin` token streams
-- generated `.npy` tensors
-- most intermediate checkpoints
-- final `.pt` checkpoint binary in this repository snapshot
+Therefore **a fresh clone can inspect the architecture and tokenizer, but cannot reproduce the published Stage-F training/evaluation scores or trained chat end-to-end without additional files**. The corpus-preparation subset can be rerun subject to upstream dataset availability and terms.
 
-The source archive recorded a 30,003,200-token full run. The final Stage-F candidate reported 84.1% controlled factual accuracy, 75.0% held-out conversation semantic/exact accuracy, and 100% synthetic unknown/refusal behavior. These bounded metrics must be interpreted together with the documented free-form failures.
+## Artifact integrity
+
+The expected filenames and SHA-256 hashes of selected original model checkpoints are in [the manifest](../checkpoints/checkpoint_manifest.json). A checksum verifies the identity of a supplied file; it does **not** make that file available or establish its redistribution rights.
+
+## Interpreting historical metrics
+
+The archived run reports 30,003,200 training tokens, final baseline validation loss 2.7485, and Stage-F controlled factual/held-out conversation results. These are **recorded experimental outputs**, not independently verified benchmark reproductions. Consult [Evaluation](EVALUATION.md) for the deliberately documented free-form failure cases.
+
+## What would make this reproducible?
+
+Publish reviewed checkpoints, restore the missing training/evaluation scripts, lock dependencies and dataset revisions, and provide a single documented command that regenerates an identified evaluation report. See [the roadmap](ROADMAP.md).
