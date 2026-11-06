@@ -81,15 +81,7 @@ cd Tiny-ChatF427
 python -m venv .venv
 ```
 
-Activate the environment:
-
-```bash
-# Linux / macOS
-source .venv/bin/activate
-
-# Windows PowerShell
-# .\.venv\Scripts\Activate.ps1
-```
+Activate the environment with `source .venv/bin/activate` on Linux/macOS, or `.\.venv\Scripts\Activate.ps1` in Windows PowerShell. See the [platform-specific setup guide](docs/GETTING_STARTED.md) for other shells.
 
 ```bash
 python -m pip install -e .
